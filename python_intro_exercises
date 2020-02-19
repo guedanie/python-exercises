@@ -69,7 +69,7 @@ g_pay = 400 * 4
 a_pay = 380 * 6
 f_pay = 350 * 10
 
-return sum(g_pay,a_pay,f_pay)
+total_salary = sum(g_pay,a_pay,f_pay)
 
 #A student can be enrolled to a class only if the 
 #class is not full and the class schedule does 
