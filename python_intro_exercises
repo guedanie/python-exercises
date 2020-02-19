@@ -86,6 +86,26 @@ def student_eligible():
 #not expired. Premium members do not need to buy 
 #a specific amount of products.
 
+product_offer = (purchased_products > 2 or member_status == 'Premium') and offer_expiration > current_date
 
 
+# Create a variable that holds a boolean value for each of the following conditions:
 
+username = 'codeup'
+password = 'notastrongpassword'
+
+#the password must be at least 5 characters
+
+password_length = len(password) > 5
+
+#the username must be no more than 20 characters
+
+username_len = len(username) <= 20
+
+#the password must not be the same as the username
+
+duplicate_checker = username != password
+
+#bonus neither the username or password can start or end with whitespace
+
+white_space = username[0] != ' ' and password[0] != ' '
