@@ -128,4 +128,3 @@ def cumsum(list):
     for number in range(1, len(s)):
         s[number] += s[number - 1]
     return s
-
