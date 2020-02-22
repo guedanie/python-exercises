@@ -128,3 +128,47 @@ def cumsum(list):
     for number in range(1, len(s)):
         s[number] += s[number - 1]
     return s
+
+## Bonus n.1
+
+# Create a function named twelveto24. It should accept a
+#  string in the format 10:45am or 4:30pm and
+#  return a string that is the representation of the time
+#  in a 24-hour format. Bonus write a function that
+#  does the opposite.
+
+def twelveto24(string):
+    if (string[-2:] == 'am' or string[-2:] == "AM") and string[:2] == '12':
+        return '00' + string[2:-2]
+    elif string[-2:] == 'am' or string[-2:] == "AM":
+        return string[:-2]
+    elif (string[-2:] == "PM" or string[-2:] == 'pm') and string[:2] == '12':
+        return string[:-2]
+    else:
+        return str(int(string[:2]) + 12) + string[2:8]
+
+# Bonus n. 2
+# Create a function named col_index. It should accept
+#  a spreadsheet column name, and return the index number
+#  of the column.
+# col_index('A') returns 1
+# col_index('B') returns 2
+# col_index('AA') returns 27
+
+single_letters = "abcdefghijklmnopqrstuvwxyz"
+position = 0
+def col_index(column_name):
+    column_name = column_name.lower()
+    length = len(column_name)
+    if length == 1:
+        return single_letters.index(column_name) + 1
+    elif length > 1:
+        if column_name[0] in single_letters: 
+            index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1))
+            if column_name[0] == 'a':
+                index += 1
+            else: 
+                index -= (single_letters.index(column_name[0]) - 1)
+        if column_name[1] in single_letters:
+            index += single_letters.index(column_name[1])
+    return index
