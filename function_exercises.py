@@ -192,52 +192,54 @@ def col_index(column_name):
             index += single_letters.index(column_name[1])
     return index
 
-## If col_index is three digits:
-single_letters = "abcdefghijklmnopqrstuvwxyz"
-position = 0
-def col_index(column_name):
-    column_name = column_name.lower()
-    length = len(column_name)
-    index = 0
-    if length == 1:
-        return single_letters.index(column_name) + 1
-    elif length == 2:
-        if column_name[0] in single_letters: 
-            index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1))
-            if column_name[0] == 'a':
-                index += 1
-            else: 
-                index -= (single_letters.index(column_name[0]) - 1)
-        if column_name[1] in single_letters:
-            index += single_letters.index(column_name[1])
-    elif length == 3:
-        if column_name[0] in single_letters: 
-            index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1)) 
-            if column_name[0] == 'a':
-                index += 1
-            else: 
-                index -= (single_letters.index(column_name[0]) - 1)
-        if column_name[1] in single_letters:
-            index = index * (single_letters.index(column_name[1]) + ( 26 * (single_letters.index(column_name[1])+ 1)))
-            if column_name[0] == 'a':
-                index += 1
-            else: 
-                index -= (single_letters.index(column_name[0]) - 1)
-        if column_name[2] in single_letters:
-            index += single_letters.index(column_name[2])
+# ## If col_index is three digits:
+# single_letters = "abcdefghijklmnopqrstuvwxyz"
+# position = 0
+# def col_index(column_name):
+#     column_name = column_name.lower()
+#     length = len(column_name)
+#     index = 0
+#     if length == 1:
+#         return single_letters.index(column_name) + 1
+#     elif length == 2:
+#         if column_name[0] in single_letters: 
+#             index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1))
+#             if column_name[0] == 'a':
+#                 index += 1
+#             else: 
+#                 index -= (single_letters.index(column_name[0]) - 1)
+#         if column_name[1] in single_letters:
+#             index += single_letters.index(column_name[1])
+#     elif length == 3:
+#         if column_name[0] in single_letters: 
+#             index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1)) 
+#             if column_name[0] == 'a':
+#                 index += 1
+#             else: 
+#                 index -= (single_letters.index(column_name[0]) - 1)
+#         if column_name[1] in single_letters:
+#             index = index * (single_letters.index(column_name[1]) + ( 26 * (single_letters.index(column_name[1])+ 1)))
+#             if column_name[0] == 'a':
+#                 index += 1
+#             else: 
+#                 index -= (single_letters.index(column_name[0]) - 1)
+#         if column_name[2] in single_letters:
+#             index += single_letters.index(column_name[2])
         
             
-    return index
+#     return index
 
 ## Alternative:
 
-def col_index(column_name):
-    index = 0
-    if len(column_name) == 1:
-        if column_name[0] in single_letters:
-            index = single_letters.index(column_name[0]) + 1
-    if len(column_name) == 2:
-        index = (single_letters.index(column_name[0]) + 1) + (single_letters.index(column_name[1])) + 26
-    if len(column_name) == 3:
-        index = (single_letters.index(column_name) + 1) + (26 * (single_letter.index(column_name) + 1))
-    return index
+# def col_index(column_name):
+#     index = 0
+#     if len(column_name) == 1:
+#         for letter in column_name:
+#             index = single_letters.index(column_name[0]) + 1
+#     if len(column_name) == 2:
+#         for letter in column_name:
+#         index = (single_letters.index(column_name[0]) + 1) + (single_letters.index(column_name[1])) + 26
+#     if len(column_name) == 3:
+#         for letter in column_name:
+#         index = (single_letters.index(column_name[0]) + 1) * (26 * (single_letters.index(column_name[1]) + 1)) * (26 * (single_letter.index(column_name[2]) + 1))
+#     return index
