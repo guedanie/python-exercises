@@ -10,6 +10,11 @@ def is_two(x):
     else:
         return False
 
+## The easier and shorter way to write this is:
+
+#def is_two(x):
+    #return x == 2 or x == '2'
+
 # Q2: Define a function named is_vowel. 
 # It should return True if the passed string is a vowel, False otherwise.
 vowels = "aeiouAEIOU"
@@ -18,6 +23,12 @@ def is_vowel(x):
         return True
     else:
         return False
+
+
+# This could be written as:
+
+#def is_vowel(x):
+    #return len(x) == 1 and x in vowels
 
 #Q3: Define a function named is_consonant. 
 # It should return True if the passed string is a consonant, 
@@ -62,12 +73,12 @@ def apply_discount(price, discount_percentage):
 # contains commas in it as input, and return a number as output.
 
 def handle_commas(string):
-    if string.isdigit() == False:
+    if string.isdigit() == False and ',' in string:
         string = string.replace(',','')
         string = int(string)
         return string
     else:
-        return 'Input not a string that is a number'
+        return 'Input not a string that is a number or a number with a comma'
 
 # Q8: Define a function named get_letter_grade. 
 # It should accept a number and return the letter 
@@ -110,12 +121,11 @@ def remove_vowels(string):
 not_python_identifiers = '@, #, %, &, *, !, $, ^'
 def normalize_name(string):
     for letter in string:
-        string = string.lower()
-        string = string.strip()
-        string = string.replace(' ', '_')
         if letter in not_python_identifiers:
             string = string.replace(letter, '')
-    return string
+    return string.lower().strip().replace(' ', '_')
+        
+   
 
 #Q11: Write a function named cumsum that accepts a list 
 # of numbers and returns a list that is the cumulative sum of 
@@ -147,6 +157,14 @@ def twelveto24(string):
     else:
         return str(int(string[:2]) + 12) + string[2:8]
 
+#mini bonus:
+def twentyfourto12(string):
+    if string[0] != '0' or string[0] != ' ':
+        new_number = str(int(string[:2]) - 12) + string[2:8] + 'PM'
+    else:
+        new_number =  string + 'AM'
+    return new_number
+
 # Bonus n. 2
 # Create a function named col_index. It should accept
 #  a spreadsheet column name, and return the index number
@@ -154,6 +172,7 @@ def twelveto24(string):
 # col_index('A') returns 1
 # col_index('B') returns 2
 # col_index('AA') returns 27
+# max rows = 'XFT' = 16,384
 
 single_letters = "abcdefghijklmnopqrstuvwxyz"
 position = 0
@@ -171,4 +190,54 @@ def col_index(column_name):
                 index -= (single_letters.index(column_name[0]) - 1)
         if column_name[1] in single_letters:
             index += single_letters.index(column_name[1])
+    return index
+
+## If col_index is three digits:
+single_letters = "abcdefghijklmnopqrstuvwxyz"
+position = 0
+def col_index(column_name):
+    column_name = column_name.lower()
+    length = len(column_name)
+    index = 0
+    if length == 1:
+        return single_letters.index(column_name) + 1
+    elif length == 2:
+        if column_name[0] in single_letters: 
+            index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1))
+            if column_name[0] == 'a':
+                index += 1
+            else: 
+                index -= (single_letters.index(column_name[0]) - 1)
+        if column_name[1] in single_letters:
+            index += single_letters.index(column_name[1])
+    elif length == 3:
+        if column_name[0] in single_letters: 
+            index = single_letters.index(column_name[0]) + (26 * (single_letters.index(column_name[0])+ 1)) 
+            if column_name[0] == 'a':
+                index += 1
+            else: 
+                index -= (single_letters.index(column_name[0]) - 1)
+        if column_name[1] in single_letters:
+            index = index * (single_letters.index(column_name[1]) + ( 26 * (single_letters.index(column_name[1])+ 1)))
+            if column_name[0] == 'a':
+                index += 1
+            else: 
+                index -= (single_letters.index(column_name[0]) - 1)
+        if column_name[2] in single_letters:
+            index += single_letters.index(column_name[2])
+        
+            
+    return index
+
+## Alternative:
+
+def col_index(column_name):
+    index = 0
+    if len(column_name) == 1:
+        if column_name[0] in single_letters:
+            index = single_letters.index(column_name[0]) + 1
+    if len(column_name) == 2:
+        index = (single_letters.index(column_name[0]) + 1) + (single_letters.index(column_name[1])) + 26
+    if len(column_name) == 3:
+        index = (single_letters.index(column_name) + 1) + (26 * (single_letter.index(column_name) + 1))
     return index
