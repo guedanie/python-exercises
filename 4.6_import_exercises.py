@@ -18,27 +18,29 @@ from function_exercises import is_two as contains_two
 #How many different ways can you combine the letters from "abc" with the numbers 1, 2, and 3?
 
 from itertools import combinations
+from itertools import combinations_with_replacement
+from itertools import product
 
-print(len(list(combinations("abc", 1))))
+len(list(product([1,2,3], 'abc')))
 
-print(len(list(combinations("abc", 2))))
-
-print(len(list(combinations("abc", 3))))
-
-# Count is inversely reladed
 
 #How many different ways can you combine two of the letters from "abcd"?
 
-print(len(list(combinations("abcd", 2))))
+len(list(combinations("abcd", 2)))
 
 ## Save this file as profiles.json inside of your exercises directory. 
 # Use the load function from the json module to open this file, it will 
 # produce a list of dictionaries. Using this data, write some code that 
 # calculates and outputs the following information:
 
-import json 
+import json
+from pprint import pprint
 
 new_dictionary = json.load(open("profiles.json"))
+
+pprint(new_dictionary)
+
+new_dictionary[0].keys() # This returns all keys in a dictionary
 
 # Total number of users
 
@@ -47,31 +49,31 @@ len([x['_id'] for x in new_dictionary])
 # Result = 19
 
 # Number of active users
-len([x['_id'] for x in new_dictionary if x['isActive'] == True]) 
+len([x['_id'] for x in new_dictionary if x['isActive']]) 
 
 # Result = 9
 
 # Number of inactive users
 
-len([x['_id'] for x in new_dictionary if x['isActive'] == False]) 
+len([x['_id'] for x in new_dictionary if not x['isActive']]) 
 
 # Result = 10
 
 # Grand total of balances for all users
 
-balance = [x["balance"] for x in new_dictionary]
+# Turn it into a function: 
 
-new_balance = [x.replace('$', '') for x in balance]
+def turning_string_to_float(profile):
+    return float(profile['balance'].replace('$', '').replace(',',''))
 
-new_balance = [x.replace(',', '') for x in balance]
-
-numbers = sum(float(new_balance))
+total_balance = sum([turning_string_to_float(profile) for profile in new_dictionary])
 
 # Result is 52667.02
 
+
 # Average balance per user
 
-sum(numbers)/ len(numbers)
+total_balance / len(new_dictionary)
 
 # Result = 2771.94
 
@@ -88,6 +90,8 @@ min(balance, key = lambda item: item[1])
 
 # User with the highest balance
 max(balance, key = lambda item: item[1]) 
+
+min(new_dictionary, key= turning_string_to_float)
 
 # Result =  ('Fay Hammond', 3919.64),
 
@@ -106,15 +110,18 @@ min(fruit_count)
 # Total number of unread messages for all users
 unread_messages = [profile['greeting'] for profile in new_dictionary] 
 
+int(''.join([c for c in unread_messages if c.isdigit()]))
+
 def get_number_messages(string):
     parts = string.split(' ')
     for part in parts:
         if part.isdigit():
             return int(part)
 
-unread_messages_number = 0
-
-for items in unread_messages: 
-    unread_messages_number += get_number_messages(items) 
+sum([get_number_messages(profile) for profile in unread_messages])
 
 #Result = 210
+
+# Quick and dirty:
+
+int([profile["greeting"][-19:-17].strip() for profile in new_dictionary])
