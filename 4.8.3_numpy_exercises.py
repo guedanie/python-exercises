@@ -218,12 +218,12 @@ c_np.dot(c)
 # Exercise 7 - Write the code necessary to sum up the 
 # result of c times c transposed. Answer should be 261
 
-c_s = (c_np.dot(c_np.T)).sum()
+c_s = (c_np * (c_np.T)).sum()
 
 # Exercise 8 - Write the code necessary to determine the product of
 #  c times c transposed. Answer should be 131681894400.
 
-c_np.dot(c_np.T).prod()
+c_p = (c_np * (c_np.T)).prod()
 
 ## Setup 4
 d = [
@@ -240,7 +240,7 @@ np.sin(d_np)
 
 # Exercise 2 - Find the cosine of all the numbers in d
 
-np.con(d_np)
+np.cos(d_np)
 
 # Exercise 3 - Find the tangent of all the numbers in d
 
